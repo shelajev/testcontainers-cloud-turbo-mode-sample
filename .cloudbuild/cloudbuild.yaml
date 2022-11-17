@@ -1,0 +1,19 @@
+steps:
+  - name: 'maven:3-openjdk-18-slim'
+    args:
+      - '-c'
+      - >
+        curl -L -o agent
+        https://app.testcontainers.cloud/download/testcontainers-cloud-agent_linux_x86-64 && chmod +x agent
+        ./agent &
+        ./agent wait
+
+        mvn test
+    dir: '${_APP_NAME}'
+    entrypoint: bash
+    secretEnv:
+      - TC_CLOUD_TOKEN
+availableSecrets:
+  secretManager:
+    - versionName: projects/411343891013/secrets/TC_CLOUD_TOKEN/versions/latest
+      env: TC_CLOUD_TOKEN
