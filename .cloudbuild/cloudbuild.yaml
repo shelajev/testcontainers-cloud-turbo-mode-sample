@@ -8,7 +8,7 @@ steps:
         ./agent &
         ./agent wait
 
-        mvn test
+        ./gradlew test
     dir: '${_APP_NAME}'
     entrypoint: bash
     secretEnv:
